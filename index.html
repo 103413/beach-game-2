@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strand Scene</title>
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+</head>
+
+<body>
+  <a-scene background="color: #5bbcff">
+
+    <a-assets>
+      <audio id="schelpGeluid" src="stereogenicstudio-beach-02-404144.mp3"></audio>
+      <a-asset-item id="tent" src="Assets/tent.glb"></a-asset-item>
+      <a-asset-item id="campfire" src="Assets/campfire-pit.glb"></a-asset-item>
+    </a-assets>
+
+    <a-entity
+      id="tentModel"
+      gltf-model="#tent"
+      scale="8 8 8"
+      position="8 0.2 3"
+      animation__rotate="
+        property: rotation;
+        to: 0 360 0;
+        dur: 12000;
+        easing: linear;
+        loop: true
+      "
+      animation__float="
+        property: position;
+        from: 8 0.2 3;
+        to: 8 0.7 3;
+        dur: 2500;
+        easing: easeInOutSine;
+        loop: true;
+        dir: alternate
+      ">
+    </a-entity>
+
+    <a-entity
+      gltf-model="#campfire"
+      scale="10 10 10"
+      position="-8 0 0">
+    </a-entity>
+
+    <a-sky color="#5bbcff"></a-sky>
+
+    <a-plane
+      position="0 0 -5"
+      rotation="-90 0 0"
+      width="40"
+      height="50"
+      color="#f4d27a">
+    </a-plane>
+
+    <a-plane
+      position="0 0.03 -20"
+      rotation="-90 0 0"
+      width="40"
+      height="20"
+      color="#38a9db">
+    </a-plane>
+
+    <a-circle
+      position="-6 7 -12"
+      radius="1.5"
+      color="#ffd84d">
+    </a-circle>
+
+    <a-cylinder
+      position="-5 2 -6"
+      radius="0.35"
+      height="4"
+      color="#8b5a2b">
+    </a-cylinder>
+
+    <a-cone
+      position="-5 4.5 -6"
+      radius-bottom="2"
+      radius-top="0"
+      height="3"
+      color="#28a745"
+      rotation="0 0 20">
+    </a-cone>
+
+    <a-cone
+      position="-5 4.5 -6"
+      radius-bottom="2"
+      radius-top="0"
+      height="3"
+      color="#32b34a"
+      rotation="0 0 -20">
+    </a-cone>
+
+    <a-cylinder
+      position="5 2 -7"
+      radius="0.35"
+      height="4"
+      color="#8b5a2b">
+    </a-cylinder>
+
+    <a-cone
+      position="5 4.5 -7"
+      radius-bottom="2"
+      radius-top="0"
+      height="3"
+      color="#28a745"
+      rotation="0 0 20">
+    </a-cone>
+
+    <a-cone
+      position="5 4.5 -7"
+      radius-bottom="2"
+      radius-top="0"
+      height="3"
+      color="#32b34a"
+      rotation="0 0 -20">
+    </a-cone>
+
+    <a-sphere
+      id="schelp"
+      position="0 0.65 -4"
+      radius="0.8"
+      scale="1 0.35 1"
+      color="#fff0d0"
+      sound="src: #schelpGeluid; autoplay: false"
+      animation__hover="
+        property: scale;
+        to: 1.15 0.45 1.15;
+        dur: 500;
+        startEvents: mouseenter
+      "
+      animation__leave="
+        property: scale;
+        to: 1 0.35 1;
+        dur: 500;
+        startEvents: mouseleave
+      "
+      animation__click="
+        property: rotation;
+        to: 0 360 0;
+        dur: 1200;
+        startEvents: click
+      ">
+    </a-sphere>
+
+    <a-ring
+      position="0 0.66 -4"
+      rotation="-90 0 0"
+      radius-inner="0.2"
+      radius-outer="0.65"
+      color="#e5a9a9">
+    </a-ring>
+
+    <a-text
+      value="KLIK OP DE SCHELP!"
+      position="-1.5 2 -4"
+      scale="1.4 1.4 1.4"
+      color="#ffffff"
+      align="center">
+    </a-text>
+
+    <a-entity
+      light="
+        type: spot;
+        color: #fff4d6;
+        intensity: 2;
+        distance: 20;
+        angle: 35;
+        penumbra: 0.4;
+        decay: 1
+      "
+      position="8 10 3"
+      rotation="-90 0 0">
+    </a-entity>
+
+    <a-entity
+      light="
+        type: ambient;
+        color: #ffffff;
+        intensity: 0.7
+      ">
+    </a-entity>
+
+    <a-camera position="0 2 4">
+      <a-cursor
+        color="#ffffff"
+        fuse="false">
+      </a-cursor>
+    </a-camera>
+
+    <script>
+      const schelp = document.querySelector('#schelp');
+
+      schelp.addEventListener('click', function () {
+        schelp.components.sound.playSound();
+      });
+    </script>
+
+  </a-scene>
+</body>
+</html>
